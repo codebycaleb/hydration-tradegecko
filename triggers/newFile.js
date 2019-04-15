@@ -21,6 +21,38 @@ const listFiles = (z, bundle) => {
     });
 };
 
+const identity = (z, bundle) => {
+  return [
+    {
+      id: new Date().getTime(),
+      line_items: [
+        {
+          id: 1,
+          data: z.dehydrate(hydrators.wrap, {hello: "world"})
+        }, {
+          id: 2,
+          data: z.dehydrate(hydrators.wrap, {hello: "there"})
+        }
+      ]
+    }
+  ]
+//   return [
+//     {
+//       id: new Date().getTime(),
+//       static_dehydrated: z.dehydrate(hydrators.identity, {data: 42}),
+//       line_items: [
+//         {
+//           id: 1,
+//           data: z.dehydrate(hydrators.identity, {data: {id: 11, description: {data: {text: 'In West Philadelphia, born and raised'}}}}) 
+//         }, {
+//           id: 2,
+//           data: z.dehydrate(hydrators.identity, {data: {id: 22, description: {data: {text: 'On the playground is where I spent most of my days'}}}}) 
+//         }
+//       ]
+//     }
+//   ]
+}
+
 // We recommend writing your triggers separate like this and rolling them
 // into the App definition at the end.
 module.exports = {
@@ -36,16 +68,28 @@ module.exports = {
 
   // `operation` is where the business logic goes.
   operation: {
-    perform: listFiles,
+//     perform: listFiles,
+    perform: identity,
 
+//     sample: {
+//       id: 'E52F6A0A-0C99-4150-A53D-DD994880F4B1.txt',
+//       meta: {
+//         filename: 'E52F6A0A-0C99-4150-A53D-DD994880F4B1.txt',
+//         createdAt: '2019-03-12T18:47:09.869Z',
+//         size: 0,
+//         blocks: 0
+//       }
+//     },
     sample: {
-      id: 'E52F6A0A-0C99-4150-A53D-DD994880F4B1.txt',
-      meta: {
-        filename: 'E52F6A0A-0C99-4150-A53D-DD994880F4B1.txt',
-        createdAt: '2019-03-12T18:47:09.869Z',
-        size: 0,
-        blocks: 0
-      }
+      id: 1,
+      line_items: [
+        {
+          id: 2,
+          data: {
+            "hello": "world"
+          }
+        }
+      ]
     },
 
     outputFields: [

@@ -25,6 +25,8 @@ const hydrators = {
       {file: z.dehydrateFile(hydrators.downloadFile, {filename: bundle.inputData.filename}
     )});
   },
+  identity: (z, bundle) => bundle.inputData,
+  wrap: (z, bundle) => z.dehydrate(hydrators.identity, bundle.inputData),
 };
 
 module.exports = hydrators;
