@@ -1,6 +1,5 @@
 const hydrators = require('./hydrators');
 const newFile = require('./triggers/newFile');
-const uploadFile = require('./creates/uploadFile');
 const utils = require('./utils.js')
 
 // We can roll up all our behaviors in an App.
@@ -13,11 +12,11 @@ const App = {
   authentication: {
     type: 'session',
 //     test: (z, bundle) => z.request(`${utils.getFilesUrl(bundle)}`),
-	test: () => ({success: true}),
+    test: () => ({success: true}),
     sessionConfig: {
       perform: (z, bundle) => ({base_url: utils.tidyBaseUrl(bundle.authData.base_url)}),
     },
-    fields: [{key: 'base_url', helpText: 'e.g. `https://example.ngrok.io`'}],
+    fields: [{key: 'base_url', helpText: 'just ignore this, please - legacy from project template`'}],
   },
 
   // beforeRequest & afterResponse are optional hooks into the provided HTTP client
@@ -51,7 +50,6 @@ const App = {
 
   // If you want your creates to show up, you better include it here!
   creates: {
-    [uploadFile.key]: uploadFile,
   }
 };
 
