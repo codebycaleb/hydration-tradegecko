@@ -1,5 +1,4 @@
 const hydrators = require('../hydrators');
-const utils = require('../utils.js')
 
 const identity = (z, bundle) => {
   return [
@@ -21,19 +20,17 @@ const identity = (z, bundle) => {
 // We recommend writing your triggers separate like this and rolling them
 // into the App definition at the end.
 module.exports = {
-  key: 'newFile',
+  key: 'newExample',
 
   // You'll want to provide some helpful display labels and descriptions
   // for users. Zapier will put them into the UX.
-  noun: 'File',
+  noun: 'Example',
   display: {
-    label: 'New File',
-    description: 'Trigger when a new file is added.',
+    label: 'Static Example',
+    description: 'Always returns the same data.',
   },
 
-  // `operation` is where the business logic goes.
   operation: {
-//     perform: listFiles,
     perform: identity,
     sample: {
       id: 1,

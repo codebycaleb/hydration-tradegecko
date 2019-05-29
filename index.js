@@ -1,6 +1,5 @@
 const hydrators = require('./hydrators');
-const newFile = require('./triggers/newFile');
-const utils = require('./utils.js')
+const newExample = require('./triggers/newExample');
 
 // We can roll up all our behaviors in an App.
 const App = {
@@ -11,12 +10,11 @@ const App = {
 
   authentication: {
     type: 'session',
-//     test: (z, bundle) => z.request(`${utils.getFilesUrl(bundle)}`),
     test: () => ({success: true}),
     sessionConfig: {
-      perform: (z, bundle) => ({base_url: utils.tidyBaseUrl(bundle.authData.base_url)}),
+      perform: (z, bundle) => ({success: true})
     },
-    fields: [{key: 'base_url', helpText: 'just ignore this, please - legacy from project template`'}],
+    fields: [{key: 'number', type: 'number', helpText: 'Enter your favorite number here!'}],
   },
 
   // beforeRequest & afterResponse are optional hooks into the provided HTTP client
@@ -41,7 +39,7 @@ const App = {
 
   // If you want your triggers to show up, you better include it here!
   triggers: {
-    [newFile.key]: newFile,
+    [newExample.key]: newExample,
   },
 
   // If you want your searches to show up, you better include it here!
